@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar" style="display: none;">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2><i class="fas fa-share-alt"></i> SocialApp</h2>
+            </div>
+            <div class="nav-menu">
+                <button class="nav-btn active" onclick="showSection('feed')">
+                    <i class="fas fa-home"></i> Feed
+                </button>
+                <button class="nav-btn" onclick="showSection('discover')">
+                    <i class="fas fa-compass"></i> Discover
+                </button>
+                <button class="nav-btn" onclick="showSection('profile')">
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button class="nav-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+            <div class="user-info">
+                <span id="current-username"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Authentication Section -->
+    <div class="auth-container" id="auth-container">
+        <div class="auth-box">
+            <!-- Login Form -->
+            <div class="auth-form" id="login-form">
+                <h2><i class="fas fa-share-alt"></i> Welcome Back</h2>
+                <form onsubmit="login(event)">
+                    <div class="form-group">
+                        <input type="text" id="login-identifier" placeholder="Email or Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="auth-switch">
+                    Don't have an account? <a href="#" onclick="showSignupForm()">Sign up</a>
+                </p>
+            </div>
+
+            <!-- Signup Form -->
+            <div class="auth-form" id="signup-form" style="display: none;">
+                <h2><i class="fas fa-user-plus"></i> Join Us</h2>
+                <form onsubmit="signup(event)">
+                    <div class="form-group">
+                        <input type="text" id="signup-username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="signup-firstname" placeholder="First Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="signup-lastname" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="signup-bio" placeholder="Tell us about yourself (optional)" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="signup-password" placeholder="Password" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </form>
+                <p class="auth-switch">
+                    Already have an account? <a href="#" onclick="showLoginForm()">Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content" style="display: none;">
+        
+        <!-- Feed Section -->
+        <div class="section" id="feed-section">
+            <div class="container">
+                <!-- Create Post -->
+                <div class="create-post-box">
+                    <h3><i class="fas fa-edit"></i> Share your thoughts</h3>
+                    <form onsubmit="createPost(event)">
+                        <div class="form-group">
+                            <textarea id="post-content" placeholder="What's on your mind?" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="url" id="post-image" placeholder="Image URL (optional)">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Post
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Posts Feed -->
+                <div id="posts-container">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading posts...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discover Section -->
+        <div class="section" id="discover-section" style="display: none;">
+            <div class="container">
+                <h2><i class="fas fa-compass"></i> Discover People</h2>
+                
+                <!-- Search -->
+                <div class="search-box">
+                    <div class="form-group">
+                        <input type="text" id="search-input" placeholder="Search users...">
+                        <button onclick="searchUsers()" class="btn btn-secondary">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Users List -->
+                <div id="users-container">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading users...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section" id="profile-section" style="display: none;">
+            <div class="container">
+                <div class="profile-header">
+                    <div class="profile-info">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-details">
+                            <h2 id="profile-name">Loading...</h2>
+                            <p id="profile-username">@loading</p>
+                            <p id="profile-bio">Loading bio...</p>
+                            <div class="profile-stats">
+                                <span id="profile-posts">0 posts</span>
+                                <span id="profile-followers">0 followers</span>
+                                <span id="profile-following">0 following</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-secondary" onclick="showEditProfile()">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Edit Profile Form (Hidden by default) -->
+                <div class="edit-profile-form" id="edit-profile-form" style="display: none;">
+                    <h3>Edit Profile</h3>
+                    <form onsubmit="updateProfile(event)">
+                        <div class="form-group">
+                            <input type="text" id="edit-firstname" placeholder="First Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="edit-lastname" placeholder="Last Name" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="edit-bio" placeholder="Bio" rows="4"></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <button type="button" class="btn btn-secondary" onclick="hideEditProfile()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- User Posts -->
+                <div class="profile-posts">
+                    <h3>My Posts</h3>
+                    <div id="profile-posts-container">
+                        <div class="loading">
+                            <i class="fas fa-spinner fa-spin"></i> Loading your posts...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error/Success Messages -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Comment Modal -->
+    <div class="modal" id="comment-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Comments</h3>
+                <button class="close-btn" onclick="closeCommentModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="comments-container"></div>
+                <div class="add-comment">
+                    <form onsubmit="addComment(event)">
+                        <div class="form-group">
+                            <textarea id="comment-content" placeholder="Write a comment..." rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fas fa-comment"></i> Comment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
