@@ -56,64 +56,6 @@ A modern, full-stack social media platform built with **Express.js**, **SQLite**
 - **Sequelize ORM** - Database object-relational mapping
 - **Auto-sync** - Database tables created automatically
 
-## 📁 Project Structure
-
-```
-social-media-app/
-├── backend/
-│   ├── models/
-│   │   ├── User.js          # User model with authentication
-│   │   ├── Post.js          # Post model with content management
-│   │   ├── Comment.js       # Comment model for post interactions
-│   │   ├── Follow.js        # Follow relationship model
-│   │   └── index.js         # Database configuration and associations
-│   ├── routes/
-│   │   ├── auth.js          # Authentication routes (login/register)
-│   │   ├── users.js         # User profile and management routes
-│   │   ├── posts.js         # Post creation, feed, and interaction routes
-│   │   └── follow.js        # Follow system routes
-│   ├── middleware/
-│   │   └── auth.js          # JWT authentication middleware
-│   └── server.js            # Main Express server configuration
-├── frontend/
-│   ├── css/
-│   │   └── styles.css       # Complete responsive styling
-│   ├── js/
-│   │   └── app.js           # Frontend JavaScript logic
-│   └── index.html           # Single-page application interface
-├── package.json             # Project dependencies and scripts
-└── README.md               # Project documentation
-```
-
-## 🚀 Getting Started
-
-### **Prerequisites**
-- Node.js (v14 or higher)
-- npm (Node Package Manager)
-
-### **Installation**
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/SKANDA-SR/social-media-website.git
-   cd social-media-website
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the server**
-   ```bash
-   npm start
-   ```
-
-4. **Access the application**
-   - Open your browser
-   - Navigate to `http://localhost:3000`
-   - Sign up for a new account or login
-
 ## 📱 How to Use
 
 ### **Getting Started**
@@ -127,31 +69,6 @@ social-media-app/
 3. **Engage** - Like posts and leave comments to interact with others
 4. **Manage Profile** - Edit your profile information anytime
 
-## 🔧 API Endpoints
-
-### **Authentication**
-- `POST /api/auth/register` - Create new user account
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user info
-
-### **Users**
-- `GET /api/users/:id` - Get user profile
-- `PUT /api/users/profile` - Update user profile
-- `GET /api/users/search/:query` - Search users
-
-### **Posts**
-- `GET /api/posts/feed` - Get personalized feed
-- `POST /api/posts` - Create new post
-- `GET /api/posts/:id` - Get specific post
-- `POST /api/posts/:id/like` - Like a post
-- `POST /api/posts/:id/comments` - Add comment to post
-
-### **Follow System**
-- `POST /api/follow/:userId` - Follow a user
-- `DELETE /api/follow/:userId` - Unfollow a user
-- `GET /api/follow/:userId/followers` - Get user followers
-- `GET /api/follow/:userId/following` - Get users followed by user
-
 ## 🎯 Key Features Highlights
 
 - **🔐 Secure Authentication** - JWT-based login system with password encryption
@@ -162,15 +79,3 @@ social-media-app/
 - **💬 Interactive Comments** - Full commenting system with modal interface
 - **🔍 User Discovery** - Search and discover new users to follow
 - **📊 Social Stats** - Track your posts, followers, and following counts
-
-## 🤝 Contributing
-
-Feel free to fork this project, create feature branches, and submit pull requests for any improvements!
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**Built with ❤️ using Express.js, SQLite, and modern web technologies**
